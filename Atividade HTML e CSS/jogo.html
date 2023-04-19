@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jogo de Adivinhar o Resultado da Partida</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+		h1 {
+			text-align: center;
+			margin-top: 30px;
+		}
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 50px;
+		}
+		input {
+			margin: 10px;
+			padding: 5px;
+			width: 50px;
+			text-align: center;
+		}
+		button {
+			margin-top: 20px;
+			padding: 10px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		#result {
+			margin-top: 30px;
+			font-weight: bold;
+			font-size: 20px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>Jogo de Adivinhar o Resultado da Partida De Futebol</h1>
+    <p id="result">Resultados variam de 0x0 e 10x10</p>
+	<form>
+		<label for="time-casa">Brasil:</label>
+		<input type="number" id="time-casa" min="0">
+		<label for="time-visitante">Alemanha:</label>
+		<input type="number" id="time-visitante" min="0">
+		<button type="submit">Enviar</button>
+	</form>
+	<div id="result"></div>
+	<script>
+var resultado = {
+	timeCasa: 2,
+	timeVisitante: 1
+};
+function verificarPalpites(palpiteCasa, palpiteVisitante) {
+	if (palpiteCasa == resultado.timeCasa && palpiteVisitante == resultado.timeVisitante) {
+		return true;
+	} else {
+		return false;
+	}
+}
+function mostrarResultado(acertou) {
+	var resultadoDiv = document.getElementById("result");
+	if (acertou) {
+		resultadoDiv.innerHTML = "Parabéns, você acertou o resultado!";
+		resultadoDiv.style.color = "#4CAF50";
+	} else {
+		resultadoDiv.innerHTML = "Que pena, você errou o resultado.";
+		resultadoDiv.style.color = "#f44336";
+	}
+}
+var form = document.querySelector("form");
+form.addEventListener("submit", function(event) {
+	event.preventDefault();
+	var palpiteCasa = parseInt(document.getElementById("time-casa").value);
+	var palpiteVisitante = parseInt(document.getElementById("time-visitante").value);
+	var acertou = verificarPalpites(palpiteCasa, palpiteVisitante);
+	mostrarResultado(acertou);
+});
+
+    </script>
+</body>
+</html>
